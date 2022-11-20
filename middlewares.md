@@ -1,17 +1,76 @@
+## Middlewares
+
+### getLoggedinUser
+Get the currently logged in user from the session. This is also used to determine which header to show, or to enable editing the user's own posts from the main page
+
+## getAllPosts
+Get all posts (title, body, last saved)
+
+## getUserDetails
+This returns the username and the profile pic of a user with a specific id
+
+## getUserPosts
+Get the posts of a user by id
+
+## render
+Renders a page
+
+## register
+Check if the username or the email is taken. Checks if all the fields are filled. Register if everything is alright; save the password with some kind of encrytion
+
+## login
+Checks if all the fields are filled. Check if the username password combo matches (decrypt password here). If everything is alright, save the user to the session
+
+## forgotPW
+Checks if the username is valid, then send the new password link to the email address
+
+## newPW
+Change the user's password if the username and secret combo matches
+
+## logout
+Logout (delete session)
+
+## auth
+Used for pages that are only meant to be visible, if a user is logged in. Redirect to login, if no permission to visit
+
+## modifyUserEmail
+Modifies the user's email
+
+## modifyUserPic
+Saves (the image) and modifies the user's profile picture
+
+## getPost
+Get a specific post by id and return it's data (title, text, last save date)
+
+## deletePost
+Get a specific post by id and delete it
+
+## modifyPost
+Checks if all the fields are filled, then saves the modified data
+
+## newPost
+Checks if all the fields are filled, then saves the new data
+
 | Path | Type | Middlewares |
 | - | - | - |
-| Main page | / | Main page for Witter. All posts can be seen on the screen, with their titles, body and last save timestamp. The user's profile pic and its username is visible as well. You can either log in or navigate to a user's profile.  |
-| User profile | /profile/:userid | A person's profile.  The user's profile pic and its username is visible, as well as their posts (titles, body and last save timestamp) |
+| / | GET | getLoggedinUser, getAllPosts, getUserDetails, render |
+| /profile/:userid | GET | getLoggedinUser, getUserPosts, getUserDetails, render |
 |  |  |  |
-| Registration | /register | Register with a username, email address, and password. Each username must be unique. The user must enter their password twice, and must accept the privacy policy. They can also go back to the main page or go to Login.  |
-| Login | /login | Login with a username and password. You can navigate to the main page, to Registration or Forgot password. |
-| Forgot password | /forgotpw | Add an email address where we can send an email regarding the forgot password. We will send a link to the New password page. You can navigate to the main page or to Login. |
-| New password | /newpw/:username/:secret | The page needs a username and the user's secret. The username is visible on the page. Enter a new password twice, then save it. You can navigate to the main page or to Login. |
+| /register | GET | render |
+| /register | POST | register, login |
+| /login | GET | render |
+| /login | POST | login |
+| /forgotpw | GET | render | 
+| /forgotpw | POST | forgotPW | 
+| /newpw/:username/:secret | GET | render |
+| /newpw/:username/:secret | POST | newPW |
+| /logout | GET | logout |
 |  |  |  |
-| Main page (logged in) | / |  |
-| User profile (logged in) | /profile/:userid |  |
-| My profile | /profile |  |
-| Profile settings | /settings |  |
-| Edit a post | /post/:id/edit/ |  |
-| Delete post | /post/:id/delete |  |
-| New post | /post/new/ |  |
+| /profile | GET | auth, getLoggedinUser, getUserPosts, getUserDetails, render |
+| /settings | GET | auth, render |
+| /settings | POST | auth, getUserDetails, modifyUserEmail, newPW, modifyUserPic |
+| /post/:id/edit/ | GET | auth, render |
+| /post/:id/edit/ | POST | auth, getPost, modifyPost |
+| /post/:id/delete | POST | auth, getPost, deletePost |
+| /post/new/ | GET | auth, render |
+| /post/new/ | POST | auth, newPost |

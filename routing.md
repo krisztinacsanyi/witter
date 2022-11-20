@@ -8,9 +8,9 @@
 | Forgot password | /forgotpw | Add an email address where we can send an email regarding the forgot password. We will send a link to the New password page. You can navigate to the main page or to Login. |
 | New password | /newpw/:username/:secret | The page needs a username and the user's secret. The username is visible on the page. Enter a new password twice, then save it. You can navigate to the main page or to Login. |
 |  |  |  |
-| Main page (logged in) | / |  |
-| User profile (logged in) | /profile/:userid |  |
-| My profile | /profile |  |
-| Profile settings | /settings |  |
-| Edit a post | /post/:id/edit/ |  |
-| New post | /post/new/ |  |
+| Main page (logged in) | / | It's basically same as before, but two things change: the header and the user's own post are editable. The header now contains the following links: New post, Profile and logout. |
+| User profile (logged in) | /profile/:userid | It's basically same as before, but the header changes: it now contains the following links: New post, Profile and logout. |
+| Profile | /profile | Contains the posts of the user, which can be edited or deleted. We can also see the username and the profile picture. We can go to Profile settings from here. |
+| Profile settings | /settings | Here we can change the following details: e-mail, password, profile picture. If the inputs do not change, we do not save (& change) them. We can confirm or cancel (go back to Profile page). |
+| Edit a post | /post/:id/edit/ | We can edit an existing post (title and body). We can confirm or cancel (go back to main page). We also update the last_saved value. |
+| New post | /post/new/ | We can add a new post (with title and body). We can confirm or cancel (go back to main page). We set the last_saved value to the current timestamp. |
