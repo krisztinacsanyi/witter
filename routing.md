@@ -13,4 +13,5 @@
 | Profile | /profile | Contains the posts of the user, which can be edited or deleted. We can also see the username and the profile picture. We can go to Profile settings from here. |
 | Profile settings | /settings | Here we can change the following details: e-mail, password, profile picture. If the inputs do not change, we do not save (& change) them. We can confirm or cancel (go back to Profile page). |
 | Edit a post | /post/:id/edit/ | We can edit an existing post (title and body). We can confirm or cancel (go back to main page). We also update the last_saved value. |
+| Delete post | /post/:id/delete | Delete a post by id. |
 | New post | /post/new/ | We can add a new post (with title and body). We can confirm or cancel (go back to main page). We set the last_saved value to the current timestamp. |
