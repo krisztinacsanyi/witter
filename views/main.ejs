@@ -1,52 +1,12 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-</head>
-
+<%- include('head', {title: 'Witter' }) %>
 <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-            <a class="navbar-item has-text-weight-bold" href="/">
-                <span class="material-symbols-outlined">
-                    attribution
-                </span>&nbsp;Witter
-            </a>
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-            </a>
-        </div>
-
-        <div id="navbarBasicExample" class="navbar-menu">
-            <div class="navbar-start">
-                <a class="navbar-item">
-                    <span class="material-symbols-outlined">
-                        add
-                    </span> New post
-                </a>
-            </div>
-
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-primary">
-                            <strong>Profile</strong>
-                        </a>
-                        <a class="button is-light">
-                            Log out
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <% if (typeof user !=='undefined'){%>
+        <%- include('navbar-loggedin') %>
+    <%} else {%>
+        <%- include('navbar-simple') %>
+    <%}%>
     <div class="columns my-5 mx-auto mt-0" style="max-width: 800px;">
         <div class="column">
             <div class="card my-4">

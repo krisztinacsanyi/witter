@@ -106,14 +106,14 @@ module.exports = function (app, { userModel, postModel, saveToDatabase }) {
     /**
     * New post
     */
-    app.use('/post/:id/edit/',
+    app.use('/post/new/',
         authMW(objRepo),
         newPostMW(objRepo),
         render(objRepo, 'post-edit'))
     /**
     * Delete post
     */
-    app.post('/post/:id/edit/',
+    app.post('/post/:id/delete/',
         authMW(objRepo),
         getPostMW(objRepo),
         deletePostMW(objRepo),
