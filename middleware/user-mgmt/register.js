@@ -1,0 +1,37 @@
+module.exports = function (objRepo) {
+    const { userModel, saveToDatabase, bcrypt, uuid } = objRepo
+    return (req, res, next) => {
+        if (typeof req.body.username == 'undefined'
+            && typeof req.body.email == 'undefined'
+            && typeof req.body.pwd == 'undefined'
+            && typeof req.body.pwd2 == 'undefined'
+            && typeof req.body.pp == 'undefined') {
+            return next()
+        }
+        if (req.body.pwd != req.body.pwd2) {
+            res.locals.errors = res.locals.errors || []
+            res.locals.errors.push('Passwords do not match')
+            return next()
+        }
+        bcrypt.hash(req.body.pwd, 12, function (err, hash) {
+            if (err) {
+                console.log(err)
+                return next()
+            }
+            try {
+                userModel.insert({
+                    id: uuid.v4(),
+                    username: req.body.username,
+                    email: req.body.email.trim().toLowerCase(),
+                    profilepic: '',
+                    password: hash,
+                    secret: uuid.v4()
+                })
+            } catch (error) {
+                return next()
+            }
+            return saveToDatabase(next)
+        })
+        return next()
+    }
+}

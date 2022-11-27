@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<%- include('head', {title: 'New password' }) %>
+
+    <body>
+        <%- include('navbar-simple') %>
+            <form method="post">
+                <div class="columns my-5 mx-auto mt-0" style="max-width: 800px;">
+                    <div class="column has-text-centered">
+                        <p class="title is-2 is-spaced">New password</p>
+                        <p class="subtitle is-5">For: <%= username %></p>
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <p class="control has-icons-left">
+                                <input class="input" type="password" name="pwd" id="pwd" placeholder="Password"
+                                    required>
+                                <span class="icon is-small is-left">
+                                    <span class="material-symbols-outlined">
+                                        lock
+                                    </span>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <label class="label">Confirm Password</label>
+                            <p class="control has-icons-left">
+                                <input class="input" type="password" name="pwd2" id="pwd2" placeholder="Password"
+                                    required>
+                                <span class="icon is-small is-left">
+                                    <span class="material-symbols-outlined">
+                                        lock
+                                    </span>
+                                </span>
+                            </p>
+                            <% if (typeof errors !=='undefined' && errors.includes('Passwords do not match')) { %>
+                                <p class="help is-danger">
+                                    Passwords do not match
+                                </p>
+                            <% } %>
+                        </div>
+                        <div class="field is-grouped mx-auto my-5">
+                            <div class="control mx-auto" style="width: 200px;">
+                                <input type="submit" class="button is-link is-fullwidth" value="Confirm" />
+                            </div>
+                        </div>
+                        <div class="field is-grouped mx-auto my-5">
+                            <div class="control mx-auto" style="width: 200px;">
+                                <a href="/login" class="button is-link is-light is-fullwidth">Back to login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+    </body>
+
+</html>

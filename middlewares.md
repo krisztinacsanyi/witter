@@ -3,52 +3,52 @@
 ### getLoggedinUser
 Get the currently logged in user from the session. This is also used to determine which header to show, or to enable editing the user's own posts from the main page
 
-## getAllPosts
+### getAllPosts
 Get all posts (title, body, last saved)
 
-## getUserDetails
+### getUserDetails
 This returns the username and the profile pic of a user with a specific id
 
-## getUserPosts
+### getUserPosts
 Get the posts of a user by id
 
-## render
+### render
 Renders a page
 
-## register
+### register
 Check if the username or the email is taken. Checks if all the fields are filled. Register if everything is alright; save the password with some kind of encrytion
 
-## login
+### login
 Checks if all the fields are filled. Check if the username password combo matches (decrypt password here). If everything is alright, save the user to the session
 
-## forgotPW
+### forgotPW
 Checks if the username is valid, then send the new password link to the email address
 
-## newPW
+### newPW
 Change the user's password if the username and secret combo matches
 
-## logout
+### logout
 Logout (delete session)
 
-## auth
+### auth
 Used for pages that are only meant to be visible, if a user is logged in. Redirect to login, if no permission to visit
 
-## modifyUserEmail
+### modifyUserEmail
 Modifies the user's email
 
-## modifyUserPic
+### modifyUserPic
 Saves (the image) and modifies the user's profile picture
 
-## getPost
+### getPost
 Get a specific post by id and return it's data (title, text, last save date)
 
-## deletePost
+### deletePost
 Get a specific post by id and delete it
 
-## modifyPost
+### modifyPost
 Checks if all the fields are filled, then saves the modified data
 
-## newPost
+### newPost
 Checks if all the fields are filled, then saves the new data
 
 | Path | Type | Middlewares |

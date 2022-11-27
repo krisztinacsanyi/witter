@@ -1,0 +1,29 @@
+{
+  "name": "witter",
+  "version": "1.0.0",
+  "description": "This project is an exam assignment for a node js course. This was meant to be a very very basic and simple \"Twitter clone\", hence the name \"Witter\".",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krisztinacsanyi/witter.git"
+  },
+  "author": "Krisztina Csanyi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krisztinacsanyi/witter/issues"
+  },
+  "homepage": "https://github.com/krisztinacsanyi/witter#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "lokijs": "^1.5.12",
+    "multer": "^1.4.5-lts.1",
+    "uuid": "^9.0.0"
+  }
+}

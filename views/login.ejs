@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<%- include('head', {title: 'Login' }) %>
+
+    <body>
+        <%- include('navbar-simple') %>
+            <form action="/login" method="post">
+                <div class="columns my-5 mx-auto mt-0" style="max-width: 800px;">
+                    <div class="column has-text-centered">
+                        <% if (typeof errors !=='undefined' && errors.includes('User not found')) { %>
+                            <article class="message is-danger">
+                                <div class="message-body">
+                                    User not found with this username.
+                                </div>
+                            </article>
+                        <% } %>
+                        <% if (typeof errors !=='undefined' && errors.includes('Wrong password')) { %>
+                            <article class="message is-danger">
+                                <div class="message-body">
+                                    Wrong password for user.
+                                </div>
+                            </article>
+                        <% } %>
+                        <p class="title is-2 is-spaced mb-6">Log in to Witter</p>
+                        <div class="field">
+                            <label class="label">Username</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input" type="text" name="username" id="username" placeholder="Text input" required>
+                                <span class="icon is-small is-left">
+                                    <span class="material-symbols-outlined">
+                                        person
+                                    </span>
+                                </span>
+                                <span class="icon is-small is-right">
+                                    <i class="fas fa-check"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <p class="control has-icons-left">
+                                <input class="input" type="password" id="password" name="password" placeholder="Password" required>
+                                <span class="icon is-small is-left">
+                                    <span class="material-symbols-outlined">
+                                        lock
+                                    </span>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field mb-5">
+                            <a href="/forgotpw" class="is-underlined has-text-link">Forgot password?</a>
+                        </div>
+                        <div class="field is-grouped mx-auto my-5">
+                            <div class="control mx-auto" style="width: 200px;">
+                                <input type="submit" class="button is-link is-fullwidth" value="Log in" />
+                            </div>
+                        </div>
+                        <div class="field is-grouped mx-auto my-5">
+                            <div class="control mx-auto" style="width: 200px;">
+                                <a href="/register" class="button is-link is-light is-fullwidth">Don't have an account?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+    </body>
+
+</html>
