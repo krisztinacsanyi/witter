@@ -7,6 +7,13 @@
             <form action="/register" method="post">
                 <div class="columns my-5 mx-auto mt-0" style="max-width: 800px;">
                     <div class="column has-text-centered">
+                        <% if (typeof errors !=='undefined' && errors.includes('Username exists')) { %>
+                            <article class="message is-danger">
+                                <div class="message-body">
+                                    User already exists with this username.
+                                </div>
+                            </article>
+                        <% } %>
                         <p class="title is-2 is-spaced">Sign up for Witter</p>
                         <div class="field">
                             <label class="label">Username</label>

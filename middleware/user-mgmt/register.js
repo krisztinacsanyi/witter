@@ -13,6 +13,14 @@ module.exports = function (objRepo) {
             res.locals.errors.push('Passwords do not match')
             return next()
         }
+        const user = userModel.findOne({
+            username: req.body.username.trim()
+        })
+        if(user) {
+            res.locals.errors = res.locals.errors || []
+            res.locals.errors.push('Username exists')
+            return next()
+        }
         const hash = bcrypt.hashSync(req.body.pwd, 12)
         try {
             userModel.insert({
