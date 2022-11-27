@@ -1,5 +1,5 @@
 module.exports = function (objRepo) {
-    const { userModel, saveToDatabase } = objRepo
+    const { userModel } = objRepo
     return (req, res, next) => {
         if (typeof req.body.username == 'undefined') {
             return next()

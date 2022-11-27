@@ -20,20 +20,19 @@ module.exports = function (objRepo) {
             res.locals.errors.push('Passwords do not match')
             return next()
         }
-        bcrypt.hash(req.body.pwd, 12, function (err, hash) {
+        const hash = bcrypt.hashSync(req.body.pwd, 12)
+        try {
+            user.password = hash
+            console.log(user)
+            userModel.update(user)
+        } catch (error) {
+            return next()
+        }
+        return saveToDatabase(err => {
             if (err) {
-                console.log(err)
-                return next()
+                return next(err)
             }
-            try {
-                user.password = hash
-                console.log(user)
-                userModel.update(user)
-            } catch (error) {
-                return next()
-            }
-            return saveToDatabase(next)
+            return res.redirect('/login')
         })
-        return next()
     }
 }

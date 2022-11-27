@@ -43,7 +43,6 @@ module.exports = function (app, { userModel, postModel, saveToDatabase }) {
     */
     app.use('/register',
         registerMW(objRepo),
-        loginMW(objRepo),
         render(objRepo, 'register'))
     /**
     * Logout

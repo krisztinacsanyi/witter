@@ -13,25 +13,24 @@ module.exports = function (objRepo) {
             res.locals.errors.push('Passwords do not match')
             return next()
         }
-        bcrypt.hash(req.body.pwd, 12, function (err, hash) {
+        const hash = bcrypt.hashSync(req.body.pwd, 12)
+        try {
+            userModel.insert({
+                id: uuid.v4(),
+                username: req.body.username,
+                email: req.body.email.trim().toLowerCase(),
+                profilepic: '',
+                password: hash,
+                secret: uuid.v4()
+            })
+        } catch (error) {
+            return next()
+        }
+        return saveToDatabase(err => {
             if (err) {
-                console.log(err)
-                return next()
+                return next(err)
             }
-            try {
-                userModel.insert({
-                    id: uuid.v4(),
-                    username: req.body.username,
-                    email: req.body.email.trim().toLowerCase(),
-                    profilepic: '',
-                    password: hash,
-                    secret: uuid.v4()
-                })
-            } catch (error) {
-                return next()
-            }
-            return saveToDatabase(next)
+            return res.redirect('/login')
         })
-        return next()
     }
 }

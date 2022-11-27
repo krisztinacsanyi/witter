@@ -13,16 +13,12 @@ module.exports = function (objRepo) {
             res.locals.errors.push('User not found')
             return next()
         }
-        bcrypt.compare(req.body.password, user.password, function (err, result) {
-            if (err) {
-                return next()
-            }
-            if (result !== true) {
-                res.locals.errors = res.locals.errors || []
-                res.locals.errors.push('Wrong password')
-                return next()
-            }
-        })
+        const iscorrect =  bcrypt.compareSync(req.body.password, user.password)
+        if(!iscorrect){
+            res.locals.errors = res.locals.errors || []
+            res.locals.errors.push('Wrong password')
+            return next()
+        }
         req.session.userid = user.id
         return req.session.save(err => {
             if (err) {
