@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <%- include('head', {title: 'New post' }) %>
+<body>
+    <%- include('navbar-loggedin') %>
+    <form method="post">
+        <div class="columns my-5 mx-auto mt-0" style="max-width: 800px;">
+            <div class="column has-text-centered">
+                <p class="title is-2 is-spaced">New post</p>
+                <div class="field">
+                    <label class="label">Title</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="text" name="title" id="title" placeholder="Title..." value="<%= post.title %>">
+                        <span class="icon is-small is-left">
+                            <span class="material-symbols-outlined">
+                                title
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Text</label>
+                    <div class="control">
+                        <textarea name="text" id="text" class="textarea" placeholder="Text..."><%= post.body %></textarea>
+                    </div>
+                </div>
+                <div class="field is-grouped mx-auto my-5">
+                    <div class="control mx-auto" style="width: 200px;">
+                        <input type="submit" class="button is-link is-fullwidth" value="Send post" />
+                    </div>
+                </div>
+                <div class="field is-grouped mx-auto my-5">
+                    <div class="control mx-auto" style="width: 200px;">
+                        <a href="/" class="button is-link is-light is-fullwidth">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

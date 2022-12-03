@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('head', {title: 'My profile' }) %>
+
+<body>
+    <%- include('navbar-loggedin') %>
+    <div class="columns my-5 mx-auto mt-0" style="max-width: 800px;">
+        <div class="column is-one-fifths">
+            <figure class="image is-128x128">
+                <% if (user.profilepic=='' ) { %>
+                    <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                <% } else { %>
+                    <img src="/uploads/<%=user.profilepic %>" alt="Placeholder image">
+                <% } %>
+            </figure>
+        </div>
+        <div class="column is-three-fifths">
+            <p class="title is-1"><%= user.username %></p>
+        </div>
+        <div class="column is-one-fifths has-text-right">
+            <a href="/settings" class="material-symbols-outlined is-size-2">
+                settings
+            </a>
+        </div>
+    </div>
+    <div class="columns my-5 mx-auto mt-0" style="max-width: 800px;">
+        <div class="column">
+            <% for (let i = 0; i < posts.length;i++){ %>
+                <%- include('card', {showUser: false, post: posts[i]}) %>
+            <% } %>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -5,6 +5,9 @@
     <body>
         <%- include('navbar-simple') %>
             <form action="/login" method="post">
+                <% if (typeof redirect !== 'undefined') { %>
+                <input type="hidden" name="redirect" value="<%= redirect %>">
+                <% } %>
                 <div class="columns my-5 mx-auto mt-0" style="max-width: 800px;">
                     <div class="column has-text-centered">
                         <% if (typeof errors !=='undefined' && errors.includes('User not found')) { %>

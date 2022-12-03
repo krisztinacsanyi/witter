@@ -1,7 +1,6 @@
 const express = require('express')
 const session = require('express-session')
 const bodyParser = require('body-parser')
-
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -12,9 +11,14 @@ const { initDatabase } = require('./services/database')
 
 app.use(session({
     secret: 'sdfsdfsdfsdfAEWQETDSFGYDSASdg',
-    resave: false,
-    saveUninitialized: true
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 1 * 24 * 60 * 60 * 1000
+    }
 }))
+app.use('/uploads', express.static('uploads'))
+
 /**
  * Initialize database, then add the models to the router
  * @param cb 

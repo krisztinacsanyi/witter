@@ -1,11 +1,12 @@
 const uuid = require('uuid')
-const multer = require('multer')
-const path = require('path')
 const bcrypt = require('bcrypt')
+const moment = require('moment')
+const path = require('path')
+const multer = require('multer')
 
 const getLoggedinUserMW = require('../middleware/profile/getLoggedinUser')
-const getUserDetailsMW = require('../middleware/profile/getUserDetails')
 const getUserPostsMW = require('../middleware/profile/getUserPosts')
+const getUserByIdMW = require('../middleware/profile/getUserById')
 
 const authMW = require('../middleware/user-mgmt/auth')
 const loginMW = require('../middleware/user-mgmt/login')
@@ -13,14 +14,25 @@ const registerMW = require('../middleware/user-mgmt/register')
 const logoutMW = require('../middleware/user-mgmt/logout')
 const forgotPWMW = require('../middleware/user-mgmt/forgotPW')
 const newPWMW = require('../middleware/user-mgmt/newPW')
-const modifyUserEmailMW = require('../middleware/user-mgmt/modifyUserEmail')
-const modifyUserPicMW = require('../middleware/user-mgmt/modifyUserPic')
+const modifyUserMW = require('../middleware/user-mgmt/modifyUser')
 
 const deletePostMW = require('../middleware/posts/deletePost')
 const getAllPostsMW = require('../middleware/posts/getAllPosts')
 const getPostMW = require('../middleware/posts/getPost')
 const modifyPostMW = require('../middleware/posts/modifyPost')
 const newPostMW = require('../middleware/posts/newPost')
+
+const uploadMW = multer({
+    storage: multer.diskStorage({
+        destination: function (req, file, cb) {
+            return cb(null, `./uploads`)
+        },
+        filename: function (req, file, cb) {
+            const ext = path.extname(file.originalname).toLowerCase();
+            return cb(null, `${req.res.locals.user.id}-${Date.now()}-pic${ext}`)
+        }
+    })
+})
 
 const render = require('../middleware/render')
 
@@ -30,7 +42,8 @@ module.exports = function (app, { userModel, postModel, saveToDatabase }) {
         postModel,
         uuid,
         bcrypt,
-        saveToDatabase
+        saveToDatabase,
+        moment
     }
     /**
     * Login
@@ -66,34 +79,30 @@ module.exports = function (app, { userModel, postModel, saveToDatabase }) {
     app.get('/',
         getLoggedinUserMW(objRepo),
         getAllPostsMW(objRepo),
-        getUserDetailsMW(objRepo),
         render(objRepo, 'main'))
     /**
     * User profile
     */
-    app.get('profile/:userid',
-        getLoggedinUserMW(objRepo),
+    app.get('/profile/:userid',
+        getUserByIdMW(objRepo),
         getUserPostsMW(objRepo),
-        getUserDetailsMW(objRepo),
         render(objRepo, 'profile'))
     /**
     * My profile
     */
-    app.get('profile',
+    app.get('/profile',
         authMW(objRepo),
         getLoggedinUserMW(objRepo),
         getUserPostsMW(objRepo),
-        getUserDetailsMW(objRepo),
         render(objRepo, 'my-profile'))
     /**
     * Profile settings
     */
     app.use('/settings',
         authMW(objRepo),
-        getUserDetailsMW(objRepo),
-        modifyUserEmailMW(objRepo),
-        newPWMW(objRepo),
-        modifyUserPicMW(objRepo),
+        getLoggedinUserMW(objRepo),
+        uploadMW.single('picture'),
+        modifyUserMW(objRepo),
         render(objRepo, 'settings'))
     /**
     * Edit post
@@ -108,14 +117,14 @@ module.exports = function (app, { userModel, postModel, saveToDatabase }) {
     */
     app.use('/post/new/',
         authMW(objRepo),
+        getLoggedinUserMW(objRepo),
         newPostMW(objRepo),
-        render(objRepo, 'post-edit'))
+        render(objRepo, 'post-new'))
     /**
     * Delete post
     */
-    app.post('/post/:id/delete/',
+    app.use('/post/:id/delete/',
         authMW(objRepo),
         getPostMW(objRepo),
-        deletePostMW(objRepo),
-        render(objRepo, 'post-edit'))
+        deletePostMW(objRepo))
 }

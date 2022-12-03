@@ -13,8 +13,8 @@ module.exports = function (objRepo) {
             res.locals.errors.push('User not found')
             return next()
         }
-        const iscorrect =  bcrypt.compareSync(req.body.password, user.password)
-        if(!iscorrect){
+        const iscorrect = bcrypt.compareSync(req.body.password, user.password)
+        if (!iscorrect) {
             res.locals.errors = res.locals.errors || []
             res.locals.errors.push('Wrong password')
             return next()
@@ -23,6 +23,9 @@ module.exports = function (objRepo) {
         return req.session.save(err => {
             if (err) {
                 return next(err)
+            }
+            if (typeof req.body.redirect !== 'undefined') {
+                return res.redirect(req.body.redirect)
             }
             return res.redirect('/')
         })

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('head', {title: 'Settings' }) %>
+
+<body>
+    <%- include('navbar-loggedin') %>
+    <form action="/settings" method="POST" enctype="multipart/form-data">
+        <div class="columns my-5 mx-auto mt-0" style="max-width: 800px;">
+            <div class="column has-text-centered">
+                <p class="title is-2 is-spaced">Change profile data</p>
+                <div class="field">
+                    <label class="label">E-mail</label>
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input" type="email" placeholder="Email" name="email" id="email" value="<%= user.email %>">
+                        <span class="icon is-small is-left">
+                            <span class="material-symbols-outlined">
+                                mail
+                            </span>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fas fa-check"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">New password</label>
+                    <p class="control has-icons-left">
+                        <input class="input" type="password" placeholder="New password" id="pwd1" name="pwd1">
+                        <span class="icon is-small is-left">
+                            <span class="material-symbols-outlined">
+                                lock
+                            </span>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">Confirm password</label>
+                    <p class="control has-icons-left">
+                        <input class="input" type="password-again" placeholder="Confirm password" id="pwd2" name="pwd2">
+                        <span class="icon is-small is-left">
+                            <span class="material-symbols-outlined">
+                                lock
+                            </span>
+                        </span>
+                    </p>
+                </div>
+                <div class="file has-name is-fullwidth">
+                    <label class="file-label">
+                        <input class="file-input" type="file" name="picture" id="picture">
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <span class="material-symbols-outlined">
+                                    backup
+                                </span>
+                            </span>
+                            <span class="file-label">
+                                Upload profile picture
+                            </span>
+                        </span>
+                        <span class="file-name">
+                            <%= (user.profilepic ?? '') %>
+                        </span>
+                    </label>
+                </div>
+                <div class="field is-grouped mx-auto my-5" style="width: fit-content;">
+                    <div class="control">
+                        <input type="submit" class="button is-link is-fullwidth" value="Confirm" />
+                    </div>
+                    <div class="control">
+                        <button class="button is-link is-light">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

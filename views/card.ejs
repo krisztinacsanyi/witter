@@ -1,0 +1,44 @@
+<div class="card my-4">
+    <div class="card-content">
+        <% if (showUser==true) { %>
+        <div class="media">
+            <div class="media-left">
+                <figure class="image is-48x48">
+                    <% if (post.profilepic=='' ) { %>
+                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                        <% } else { %>
+                            <img src="/uploads/<%=post.profilepic %>" alt="Placeholder image">
+                            <% } %>
+                </figure>
+            </div>
+            <div class="media-content">
+                <p class="title is-4">@<%= post.username %>
+                </p>
+            </div>
+            <div class="media-right">
+                <time>
+                    <%= post.last_saved %>
+                </time>
+            </div>
+        </div>
+        <% } %>
+        <% if (typeof user !=='undefined' && post.userid == user.id) { %>
+        <div class="edit-btns" style="position: absolute; right: 0; top: 50%; transform: translate(105%, -50%); display: flex; gap: 10px;">
+            <a class="button" target="_blank" href="/post/<%= post.id %>/edit">
+                <span class="material-symbols-outlined"> edit </span>
+            </a>
+            <a class="button" target="_blank" href="/post/<%= post.id %>/delete">
+                <span class="material-symbols-outlined"> delete </span>
+            </a>
+        </div>
+        <%} %>
+        <div class="content">
+            <div class="content-title is-size-4 mb-2">
+                <%= post.title %>
+            </div>
+            <div class="content-text">
+                <%= post.body %>
+            </div>
+        </div>
+    </div>
+</div>
