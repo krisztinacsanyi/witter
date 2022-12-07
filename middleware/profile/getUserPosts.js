@@ -1,3 +1,8 @@
+/**
+ * Get all posts by user id
+ * @param {*} objRepo 
+ * @returns posts
+ */
 module.exports = function (objRepo) {
     const { postModel } = objRepo
     return (req, res, next) => {

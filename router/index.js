@@ -84,6 +84,7 @@ module.exports = function (app, { userModel, postModel, saveToDatabase }) {
     * User profile
     */
     app.get('/profile/:userid',
+        getLoggedinUserMW(objRepo),
         getUserByIdMW(objRepo),
         getUserPostsMW(objRepo),
         render(objRepo, 'profile'))

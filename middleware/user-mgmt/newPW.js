@@ -1,3 +1,8 @@
+/**
+ * Save a new password, update user
+ * @param {*} objRepo 
+ * @returns 
+ */
 module.exports = function (objRepo) {
     const { userModel, saveToDatabase, bcrypt } = objRepo
     return (req, res, next) => {

@@ -1,3 +1,8 @@
+/**
+ * Register a user
+ * @param {*} objRepo 
+ * @returns 
+ */
 module.exports = function (objRepo) {
     const { userModel, saveToDatabase, bcrypt, uuid } = objRepo
     return (req, res, next) => {

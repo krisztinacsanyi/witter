@@ -1,3 +1,8 @@
+/**
+ * Get all posts (with user data)
+ * @param {*} objRepo 
+ * @returns posts
+ */
 module.exports = function (objRepo) {
     const { postModel, userModel } = objRepo
     return (req, res, next) => {

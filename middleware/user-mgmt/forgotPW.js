@@ -1,3 +1,8 @@
+/**
+ * Send a forgot password "email"
+ * @param {*} objRepo 
+ * @returns 
+ */
 module.exports = function (objRepo) {
     const { userModel } = objRepo
     return (req, res, next) => {

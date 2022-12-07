@@ -24,7 +24,7 @@
             </div>
         </div>
         <% } %>
-        <% if (typeof user !=='undefined' && post.userid == user.id) { %>
+        <% if (typeof loggedId !=='undefined' && post.userid == loggedId) { %>
         <div class="edit-btns" style="position: absolute; right: 0; top: 50%; transform: translate(105%, -50%); display: flex; gap: 10px;">
             <a class="button" href="/post/<%= post.id %>/edit">
                 <span class="material-symbols-outlined"> edit </span>

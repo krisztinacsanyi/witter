@@ -1,3 +1,8 @@
+/**
+ * Modify a user's data (email, password or picture)
+ * @param {*} objRepo 
+ * @returns 
+ */
 module.exports = function (objRepo) {
     const {saveToDatabase, bcrypt } = objRepo
     return (req, res, next) => {

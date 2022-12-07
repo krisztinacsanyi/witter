@@ -1,3 +1,8 @@
+/**
+ * Modify an existing post
+ * @param {*} objRepo 
+ * @returns 
+ */
 module.exports = function (objRepo) {
     const { saveToDatabase, moment } = objRepo
     return (req, res, next) => {

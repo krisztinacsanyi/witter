@@ -1,3 +1,8 @@
+/**
+ * Get a specific post
+ * @param {*} objRepo 
+ * @returns post
+ */
 module.exports = function (objRepo) {
     const {postModel} = objRepo
     return (req, res, next) => {

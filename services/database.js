@@ -16,6 +16,10 @@ let db = false
  * - password (string somehow encryted)
  * - profilepic (string path to image)
  * 
+ * Like
+ * - id (string uuid)
+ * - post_id
+ * - user_id
 */
 
 /**

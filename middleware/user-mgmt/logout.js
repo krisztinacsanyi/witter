@@ -1,3 +1,8 @@
+/**
+ * Logout, destroy session
+ * @param {*} objRepo 
+ * @returns 
+ */
 module.exports = function (objRepo) {
     return (req, res, next) => {
         return req.session.destroy(err => {

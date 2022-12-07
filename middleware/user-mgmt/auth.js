@@ -1,4 +1,8 @@
-var url = require('url')
+/**
+ * Redirect to login when no userid in session
+ * @param {*} objRepo 
+ * @returns 
+ */
 module.exports = function (objRepo) {
     return (req, res, next) => {
         if (typeof req.session.userid === 'undefined') {

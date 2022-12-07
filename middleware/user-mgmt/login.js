@@ -1,3 +1,8 @@
+/**
+ * Log in, save userid to session
+ * @param {*} objRepo 
+ * @returns 
+ */
 module.exports = function (objRepo) {
     const { userModel, bcrypt } = objRepo
     return (req, res, next) => {

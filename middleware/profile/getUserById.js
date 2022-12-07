@@ -1,4 +1,8 @@
-
+/**
+ * Get a user by id
+ * @param {*} objRepo 
+ * @returns user
+ */
 module.exports = function (objRepo) {
     const { userModel, postModel } = objRepo
     return (req, res, next) => {
