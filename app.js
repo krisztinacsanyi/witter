@@ -19,6 +19,11 @@ app.use(session({
 }))
 app.use('/uploads', express.static('uploads'))
 
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    return res.status(500).send('Something broke on our end')
+})
+
 /**
  * Initialize database, then add the models to the router
  * @param cb 
